@@ -9,7 +9,7 @@
 import Foundation
 extension FileManager {
 
-    func copyfileToUserDocumentDirectory(forResource name: String,
+    public func copyfileToUserDocumentDirectory(forResource name: String,
                                          ofType ext: String) throws
     {
         let fileName = "\(name).\(ext)"
@@ -24,7 +24,7 @@ extension FileManager {
         }
     }
 
-    func getFileFullPath(fileName:String)->String?{
+    public func getFileFullPath(fileName:String)->String?{
         if let destPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                            .userDomainMask,
                                                            true).first{
@@ -37,7 +37,7 @@ extension FileManager {
 }
 
 extension FileManager {
-    func removeIfExisted(_ url:URL) -> Void {
+    public func removeIfExisted(_ url:URL) -> Void {
         if FileManager.default.fileExists(atPath: url.path) {
             do {
                 try FileManager.default.removeItem(atPath: url.path)
@@ -48,7 +48,7 @@ extension FileManager {
         }
     }
     
-    func tempFileUrl(_ outputName:String) ->URL{
+    public func tempFileUrl(_ outputName:String) ->URL{
         let path = NSTemporaryDirectory().appending(outputName)
         let exportURL = URL.init(fileURLWithPath: path)
         removeIfExisted(exportURL)

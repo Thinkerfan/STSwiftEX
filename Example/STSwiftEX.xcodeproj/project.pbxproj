@@ -20,7 +20,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		6952781E049D7AD1C30403E7 /* Pods_STSwiftEX_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STSwiftEX_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		920E8DAB844CDF2D7AC76F55 /* STSwiftEX.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = STSwiftEX.podspec; path = ../STSwiftEX.podspec; sourceTree = "<group>"; };
+		920E8DAB844CDF2D7AC76F55 /* STSwiftEX.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = STSwiftEX.podspec; path = ../STSwiftEX.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

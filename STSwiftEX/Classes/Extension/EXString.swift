@@ -9,11 +9,11 @@
 import Foundation
 extension String {
 
-    func replace(target: String, withString: String) -> String{
+    public func replace(target: String, withString: String) -> String{
         return self.replacingOccurrences(of: target, with: withString, options: NSString.CompareOptions.literal, range: nil)
     }
     
-    func stringFromHTML() -> String? {
+    public func stringFromHTML() -> String? {
         let data = self.data(using: String.Encoding.unicode)!
         let attrStr = try? NSAttributedString(
             data: data,
@@ -22,7 +22,7 @@ extension String {
         return attrStr?.string
     }
     
-    func insertHttpHeader()->String{
+   public  func insertHttpHeader()->String{
         let str = self.lowercased()
         if !str.hasPrefix("http://") && !str.hasPrefix("https://"){
             return "http://\(str)"
@@ -30,13 +30,13 @@ extension String {
         return str
     }
 
-    static func formatDuration(duration:Int) -> String{
+    public static func formatDuration(duration:Int) -> String{
         let minute = duration/60
         let seconds = duration%60
         return String.init(format:"%02zd:%02zd", minute, seconds)
     }
 
-    static func timeStrWithSecond(time:Int) -> String{
+    public static func timeStrWithSecond(time:Int) -> String{
         if (time / 3600 > 0) {
             let hour   = time / 3600;
             let minute = time/60
@@ -48,13 +48,13 @@ extension String {
             return String.init(format:"%02zd:%02zd", minute, seconds)
         }
     }
-    static func timeStrWithTimeInterval(time:TimeInterval,dateFormat:String) ->String{
+    public static func timeStrWithTimeInterval(time:TimeInterval,dateFormat:String) ->String{
         let format = DateFormatter()
         format.dateFormat = dateFormat
         return "\(format.string(from: Date(timeIntervalSince1970: time)))"
     }
 
-    var doubleValue: Double {
+    public var doubleValue: Double {
         return (self as NSString).doubleValue
     }
 }

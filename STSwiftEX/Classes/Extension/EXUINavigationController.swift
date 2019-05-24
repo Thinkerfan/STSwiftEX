@@ -12,17 +12,17 @@ extension UINavigationController {
     /**
      隐藏navigationBar底部一条黑线
      */
-    func hideBottomLine(){
+    public func hideBottomLine(){
         self.navigationBar.shadowImage = UIImage()
     }
     
-    func setBarTransparent(){
+    public func setBarTransparent(){
         self.navigationBar.isTranslucent = true
         self.navigationBar.setBackgroundImage(UIImage.colorForNavBar(color: UIColor.clear), for: .default)
         self.navigationBar.shadowImage = UIImage()
     }
 
-    func pushViewControllerWithoutBackButtonTitle(_ viewController: UIViewController, animated: Bool = true) {
+    public func pushViewControllerWithoutBackButtonTitle(_ viewController: UIViewController, animated: Bool = true) {
         viewControllers.last?.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         viewController.hidesBottomBarWhenPushed = true
         pushViewController(viewController, animated: animated)
@@ -31,7 +31,7 @@ extension UINavigationController {
     /**
         设置navigationBar渐变背景色
      */
-    func setBarGradientColor(colors:[UIColor],start:CGPoint = CGPoint(x: 1, y: 0),end:CGPoint = CGPoint(x: 1, y: 1) ){
+    public func setBarGradientColor(colors:[UIColor],start:CGPoint = CGPoint(x: 1, y: 0),end:CGPoint = CGPoint(x: 1, y: 1) ){
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.locations = [0.0 ,1.0]
         gradient.startPoint = start

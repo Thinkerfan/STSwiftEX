@@ -11,7 +11,7 @@ import UIKit
 extension CATransition {
     
     //New viewController will appear from bottom of screen.
-    func segueFromBottom() -> CATransition {
+    public func segueFromBottom() -> CATransition {
         self.duration = 0.375 //set the duration to whatever you'd like.
         self.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         self.type = CATransitionType.moveIn
@@ -19,7 +19,7 @@ extension CATransition {
         return self
     }
     //New viewController will appear from top of screen.
-    func segueFromTop() -> CATransition {
+    public func segueFromTop() -> CATransition {
         self.duration = 0.375 //set the duration to whatever you'd like.
         self.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         self.type = CATransitionType.moveIn
@@ -27,7 +27,7 @@ extension CATransition {
         return self
     }
     //New viewController will appear from left side of screen.
-    func segueFromLeft() -> CATransition {
+    public func segueFromLeft() -> CATransition {
         self.duration = 0.1 //set the duration to whatever you'd like.
         self.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         self.type = CATransitionType.moveIn
@@ -35,7 +35,7 @@ extension CATransition {
         return self
     }
     //New viewController will pop from right side of screen.
-    func popFromRight() -> CATransition {
+    public func popFromRight() -> CATransition {
         self.duration = 0.1 //set the duration to whatever you'd like.
         self.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         self.type = CATransitionType.reveal
@@ -43,7 +43,7 @@ extension CATransition {
         return self
     }
     //New viewController will appear from left side of screen.
-    func popFromLeft() -> CATransition {
+    public func popFromLeft() -> CATransition {
         self.duration = 0.1 //set the duration to whatever you'd like.
         self.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         self.type = CATransitionType.reveal

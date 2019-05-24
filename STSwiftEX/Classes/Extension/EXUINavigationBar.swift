@@ -7,12 +7,12 @@
 //
 
 import UIKit
-class CFNavigationBar:UIView{
+public class CFNavigationBar:UIView{
 
     var lbTitle:UILabel!
     var btnBack:UIButton!
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }

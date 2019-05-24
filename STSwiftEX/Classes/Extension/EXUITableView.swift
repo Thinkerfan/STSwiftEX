@@ -8,7 +8,7 @@
 
 import UIKit
 class SearchbarTableView:UITableView{
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+   public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.superview?.endEditing(true)
         super.touchesBegan(touches, with: event)
     }

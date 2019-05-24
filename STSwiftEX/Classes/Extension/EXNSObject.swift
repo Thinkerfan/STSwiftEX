@@ -11,11 +11,11 @@
 import Foundation
 
 extension NSObject {
-    var className: String {
+    public var className: String {
         return NSStringFromClass(type(of: self))
     }
 
-    class var className: String {
+    public class var className: String {
         return String(describing: self)
     }
 }

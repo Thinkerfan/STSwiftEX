@@ -12,7 +12,7 @@ extension UITabBar{
     /**
      隐藏顶部一条黑线
      */
-    func hideTopLine(){
+    public func hideTopLine(){
         self.shadowImage = UIImage()
         self.backgroundImage = UIImage()
     }
@@ -27,7 +27,7 @@ extension UITabBar{
         static var TabCenterButton = "centerButton"
     }
 
-    var centerTab:UIButton?{
+    public var centerTab:UIButton?{
         get{
             //通过Key获取已存在的对象
             return objc_getAssociatedObject(self, &AssociatedKeys.TabCenterButton) as? UIButton
@@ -41,7 +41,7 @@ extension UITabBar{
     /**
      添加中心按钮
      */
-    func addCenterTab(image:String)->UIButton
+    public func addCenterTab(image:String)->UIButton
     {
         if self.centerTab == nil
         {
@@ -54,12 +54,13 @@ extension UITabBar{
         return self.centerTab!
     }
 }
-class CFTabbar:UITabBar{
+
+public class CFTabbar:UITabBar{
     var itemFrames = [CGRect]()
     var tabBarItems = [UIView]()
 
 
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
 
         if itemFrames.isEmpty, let UITabBarButtonClass = NSClassFromString("UITabBarButton") as? NSObject.Type {
