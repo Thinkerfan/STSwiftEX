@@ -143,6 +143,7 @@ public class ImageUtil{
         }
     }
     
+    /// Convert UIColor to UIImage
     public static func imageFromColor(color: UIColor) -> UIImage? {
         let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
         UIGraphicsBeginImageContext(rect.size)
