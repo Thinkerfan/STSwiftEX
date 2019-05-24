@@ -1,6 +1,6 @@
 //
 //  EXBundle.swift
-//  STSWiftSDK
+//  Bundle 扩展类
 //
 //  Created by cfans on 2018/10/4.
 //  Copyright © 2018年 cfans. All rights reserved.
@@ -8,6 +8,8 @@
 
 import UIKit
 extension Bundle {
+    
+    /// Returns the app name
     public static func appName() -> String {
         guard let dictionary = Bundle.main.infoDictionary else {
             return ""
@@ -18,7 +20,8 @@ extension Bundle {
             return ""
         }
     }
-
+    
+    /// Returns the app version
     public static func appVersion() -> String {
         guard let dictionary = Bundle.main.infoDictionary else {
             return "V1.0.1"
@@ -30,7 +33,8 @@ extension Bundle {
         }
     }
     
-   public static func appBundleID() -> String {
+    /// Returns the app bundle ID
+    public static func appBundleID() -> String {
         return Bundle.main.bundleIdentifier!
     }
 }

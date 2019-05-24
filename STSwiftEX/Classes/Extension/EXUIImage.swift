@@ -1,6 +1,6 @@
 //
 //  EXUIImage.swift
-//  Song
+//  UIImage 扩展类
 //
 //  Created by cfans on 2018/11/21.
 //  Copyright © 2018 cfans. All rights reserved.
@@ -8,6 +8,8 @@
 
 import UIKit
 extension UIImage{
+    
+    /// 根据颜色值来调整UIImage的颜色
     func tint(color: UIColor, blendMode: CGBlendMode) -> UIImage?{
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         defer { UIGraphicsEndImageContext() }
@@ -16,6 +18,8 @@ extension UIImage{
             .draw(in: CGRect(origin: .zero, size: size))
         return UIGraphicsGetImageFromCurrentImageContext()
     }
+    
+    /// 生成正方形的UIImage
     func square() -> UIImage {
         let imageWidth = self.size.width
         let imageHeight = self.size.height
@@ -30,22 +34,7 @@ extension UIImage{
         }
     }
 
-    func clip(count: Int) -> [UIImage] {
-        var imageArray = [UIImage]()
-        let imageSize = self.size.width
-        let newImageWidth: CGFloat = imageSize / CGFloat(count)
-
-        for i in 0..<count {
-            for j in 0..<count {
-                let newImageRect = CGRect(x: CGFloat(j) * newImageWidth, y:CGFloat(i) * newImageWidth, width: newImageWidth, height: newImageWidth)
-                let imageRef = self.cgImage!.cropping(to: newImageRect)
-                let newImage = UIImage(cgImage: imageRef!)
-                imageArray.append(newImage)
-            }
-        }
-        return imageArray
-    }
-    
+    /// 根据行数和列数来切分UIImage
     func slice(column:Int,row:Int) -> [UIImage]{
         var imageArray = [UIImage]()
         
@@ -65,36 +54,17 @@ extension UIImage{
         return imageArray
     }
 
+    /// 拷贝UIImage
     func imageCopy()->UIImage{
         return UIImage(cgImage: self.cgImage!)
-    }
-
-    static func filterForGaussianBlur(image:UIImage)->UIImage{
-        if let filter = CIFilter(name: "CIGaussianBlur"){
-            let blur = 10 * image.size.width / UIScreen.main.bounds.width
-            let inImage = image.ciImage
-            filter.setValue(blur, forKey: "inputRadius")
-            filter.setValue(inImage, forKey: kCIInputImageKey)
-            let outImage = filter.outputImage
-            return UIImage(ciImage: outImage!)
-        }else{
-            return image
-        }
-    }
-
-    static func screenShot(view:UIView,size:CGSize) -> UIImage{
-        var image = UIImage()
-        UIGraphicsBeginImageContextWithOptions(size, true, UIScreen.main.scale)
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        image = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return image
     }
 }
 
 // Image 缩放旋转处理
 extension UIImage{
-    func rotatedImageWithTransform(_ rotation: CGAffineTransform, croppedToRect rect: CGRect) -> UIImage {
+    
+    // 缩放旋转处理
+    public func rotatedImageWithTransform(_ rotation: CGAffineTransform, croppedToRect rect: CGRect) -> UIImage {
         let rotatedImage = rotatedImageWithTransform(rotation)
         
         let scale = rotatedImage.scale
@@ -121,80 +91,8 @@ extension UIImage{
 // Image 叠加
 extension UIImage{
     
-    static func mixImageWithImage(bottom:UIImage,top:UIImage,rect:CGRect)->UIImage?{
-        UIGraphicsBeginImageContext(bottom.size)
-        //通过两张图片进行位置和大小的绘制，实现两张图片的合并；其实此原理做法也可以用于多张图片的合并
-        let width = bottom.size.width
-        let height = bottom.size.height
-        bottom.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
-        top.draw(in: rect)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img
-    }
-
-    static func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
-        let size = image.size
-
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width:size.width * heightRatio, height:size.height * heightRatio)
-        } else {
-            newSize = CGSize(width:size.width * widthRatio,  height:size.height * widthRatio)
-        }
-
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in:rect)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img
-    }
-    
-    static func scaleImageWithMaxSize(image: UIImage, maxSize: CGSize) -> UIImage? {
-        let size = image.size
-        
-        let widthRatio  = maxSize.width  / size.width
-        let heightRatio = maxSize.height / size.height
-        
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            if widthRatio > 1 {
-                newSize = size
-            }else{
-                newSize = CGSize(width:size.width * heightRatio, height:size.height * heightRatio)
-            }
-        } else {
-            if heightRatio > 1 {
-                newSize = size
-            }else{
-                newSize = CGSize(width:size.width * widthRatio,  height:size.height * widthRatio)
-            }
-        }
-        
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in:rect)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img
-    }
-
-    static func mixImageWithString(bottom:UIImage, top:NSString,rect:CGRect, withAttributes attrs: [NSAttributedString.Key : Any]? = nil)->UIImage?{
-        UIGraphicsBeginImageContext(bottom.size);
-        let width = bottom.size.width
-        let height = bottom.size.height
-        bottom.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
-        top.draw(in: rect, withAttributes: attrs)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img
-    }
-    // 修复图片旋转
-    func fixOrientation() -> UIImage {
+    /// 修复图片旋转
+    public func fixOrientation() -> UIImage {
         if self.imageOrientation == .up {
             return self
         }
@@ -259,7 +157,8 @@ extension UIImage{
 // 按照贝塞尔曲线来切图
 extension UIImage {
 
-    func imageByApplyingClippingBezierPath(_ path: UIBezierPath) -> UIImage {
+    /// 按照贝塞尔曲线来切图
+    public func imageByApplyingClippingBezierPath(_ path: UIBezierPath) -> UIImage {
         // Mask image using path
         let maskedImage = imageByApplyingMaskingBezierPath(path)
         // Crop image to frame of path
@@ -267,6 +166,7 @@ extension UIImage {
         return croppedImage
     }
 
+    /// 按照贝塞尔曲线来切图
     func imageByApplyingMaskingBezierPath(_ path: UIBezierPath) -> UIImage {
         // Define graphic context (canvas) to paint on
         UIGraphicsBeginImageContext(size)
@@ -286,6 +186,7 @@ extension UIImage {
         return maskedImage
     }
 
+    /// 按照Rect来切图
     public func crop(toRect rect: CGRect) -> UIImage? {
         if let cgImage = cgImage, let croppedImage = cgImage.cropping(to: rect) {
             return UIImage(cgImage: croppedImage, scale: scale, orientation: imageOrientation)
@@ -293,6 +194,7 @@ extension UIImage {
         return nil
     }
 
+    /// 按照贝塞尔曲线来切图
     public func clip(path: UIBezierPath) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         guard let cgImage = cgImage, let context = UIGraphicsGetCurrentContext() else {
@@ -349,47 +251,8 @@ extension UIImage {
 }
 
 extension UIImage{
-
-    static func image(fromLayer layer: CALayer) -> UIImage {
-        UIGraphicsBeginImageContext(layer.frame.size)
-        layer.render(in: UIGraphicsGetCurrentContext()!)
-        let outputImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return outputImage!
-    }
-    
-    /// Creates a gradient image with the given settings
-    class func gradient(size: CGSize, locations:[CGFloat] = [0,1],colors: [UIColor]) -> UIImage? {
-        // Turn the colors into CGColors
-        let cgcolors = colors.map { $0.cgColor }
-        // Begin the graphics context
-        UIGraphicsBeginImageContextWithOptions(size, true, 0.0)
-
-        // If no context was retrieved, then it failed
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-
-        // From now on, the context gets ended if any return happens
-        defer { UIGraphicsEndImageContext() }
-        // Create the Coregraphics gradient
-        guard let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: cgcolors as NSArray as CFArray, locations: locations) else { return nil }
-        // Draw the gradient
-        context.drawLinearGradient(gradient, start: CGPoint(x: 0.0, y: 0.0), end: CGPoint(x: size.width, y: 0.0), options: [])
-        // Generate the image (the defer takes care of closing the context)
-        return UIGraphicsGetImageFromCurrentImageContext()
-    }
-
-    class func colorForNavBar(color: UIColor) -> UIImage? {
-        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()
-        context!.setFillColor(color.cgColor)
-        context!.fill(rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }
-
-    func rotate(_ radians: CGFloat) -> UIImage {
+    /// 图片旋转
+    public func rotate(_ radians: CGFloat) -> UIImage {
         let cgImage = self.cgImage!
         let LARGEST_SIZE = CGFloat(max(self.size.width, self.size.height))
         let context = CGContext.init(data: nil, width:Int(LARGEST_SIZE), height:Int(LARGEST_SIZE), bitsPerComponent: cgImage.bitsPerComponent, bytesPerRow: 0, space: cgImage.colorSpace!, bitmapInfo: cgImage.bitmapInfo.rawValue)!
@@ -413,41 +276,12 @@ extension UIImage{
         return resultImage
     }
     
-    func image(alpha: CGFloat) -> UIImage? {
+    public func alpha(alpha: CGFloat) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         draw(at: .zero, blendMode: .normal, alpha: alpha)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
     }
-    
-    static func removeAlpha(from inputImage: UIImage) -> UIImage {
-        let format = UIGraphicsImageRendererFormat.init()
-        format.opaque = true //Removes Alpha Channel
-        format.scale = inputImage.scale //Keeps original image scale.
-        let size = inputImage.size
-        return UIGraphicsImageRenderer(size: size, format: format).image { _ in
-            inputImage.draw(in: CGRect(origin: .zero, size: size))
-        }
-    }
 }
 
-struct ImgCombineUnit {
-    var image:UIImage
-    var rect:CGRect
-}
-
-class ImgCombineUtil{
-    
-    static func combineImages(bgSize:CGSize,unit:[ImgCombineUnit])->UIImage?{
-        UIGraphicsBeginImageContext(bgSize)
-        for i in unit{
-            i.image.draw(in: i.rect)
-        }
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img
-    }
-
-    
-}

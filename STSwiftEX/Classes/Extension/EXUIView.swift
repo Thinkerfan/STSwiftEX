@@ -9,14 +9,8 @@ import UIKit
 
 extension UIView {
     
-    class func loadFromNibNamed(nibNamed: String, bundle: Bundle? = nil) -> UIView? {
-        return UINib(
-            nibName: nibNamed,
-            bundle: bundle
-            ).instantiate(withOwner: nil, options: nil)[0] as? UIView
-    }
-
-    var parentViewController: UIViewController? {
+    /// the current view‘s  UIViewController
+    public var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self
         while parentResponder != nil {
             parentResponder = parentResponder!.next
@@ -26,41 +20,18 @@ extension UIView {
         }
         return nil
     }
-    func setBackgroundImage(image:String){
-        //        let backgroundImage = UIImageView@objc (frame: @objc UIScreen.main.bounds)
-//        backgroundImage.image = UIImage(named: image)
-//        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
-//        self.insertSubview(backgroundImage, at: 0)
-
+    
+    /// set view background color maked from uimage
+    public func setBackgroundImage(image:String){
         UIGraphicsBeginImageContext(self.frame.size);
         UIImage(named: image)?.draw(in: self.frame)
         let image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         self.backgroundColor = UIColor.init(patternImage: image!)
     }
-
-    func addScaleAnim(from:Float = 1,to:Float = 0.9,duration:Double = 1.5){
-        let scaleAnim = CABasicAnimation(keyPath: "transform.scale")
-        scaleAnim.fromValue = from
-        scaleAnim.toValue = to
-        scaleAnim.duration = duration
-        scaleAnim.repeatCount = HUGE //无限重复
-        scaleAnim.autoreverses = true //动画结束时执行逆动画
-        scaleAnim.isRemovedOnCompletion = false //切出此界面再回来动画不会停
-        self.layer.removeAllAnimations()
-        self.layer.add(scaleAnim, forKey: "centerLayer")
-    }
-
-    func mkBaseAnim(keyPath:String)->CABasicAnimation{
-        let anim = CABasicAnimation(keyPath: keyPath)
-        anim.toValue = Double.pi * 2
-        anim.duration = 1.5;
-        anim.isRemovedOnCompletion = false
-        anim.repeatCount = HUGE;
-        return anim
-    }
     
-    func addGradientLayer(
+    /// add gradient layer
+    public func addGradientLayer(
         start: CGPoint = CGPoint(x: 0, y: 0), //渐变起点
         end: CGPoint = CGPoint(x: 1, y: 1), //渐变终点
         frame: CGRect,
@@ -80,7 +51,8 @@ extension UIView {
         layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    func removeGradientLayer() {
+    /// remove gradient layer
+    public func removeGradientLayer() {
         guard let layers = self.layer.sublayers else { return }
         for layer in layers {
             if layer.isKind(of: CAGradientLayer.self) {
@@ -91,10 +63,19 @@ extension UIView {
 }
 
 extension UIView {
-    /**
-     View 截图
-     */
-    func snapShot() -> UIImage?{
+    
+    /// create view from nib name
+    public static func loadFromNibNamed(nibNamed: String, bundle: Bundle? = nil) -> UIView? {
+        return UINib(
+            nibName: nibNamed,
+            bundle: bundle
+            ).instantiate(withOwner: nil, options: nil)[0] as? UIView
+    }
+}
+
+extension UIView {
+    /// 截图
+    public func snapShot() -> UIImage?{
         var image:UIImage?
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, true, 0);
         if self.drawHierarchy(in: self.bounds, afterScreenUpdates: true){
@@ -103,10 +84,9 @@ extension UIView {
         UIGraphicsEndImageContext();
         return image;
     }
-    /**
-     * 画网格线
-     */
-    func drawGrid(column:Int,row:Int,pathWidth:CGFloat = 5,pathColor:UIColor = .white){
+    
+    /// 画网格线
+    public func drawGrid(column:Int,row:Int,pathWidth:CGFloat = 5,pathColor:UIColor = .white){
         let path = UIBezierPath()
         
         let width = self.bounds.width
@@ -130,34 +110,22 @@ extension UIView {
         }
         
         path.close()
-        let layer = CAShapeLayer()
-        layer.path = path.cgPath
-        layer.lineWidth = pathWidth
-        layer.strokeColor = pathColor.cgColor
-        self.layer.addSublayer(layer)
+        drawBezierPath(path: path, pathWidth: pathWidth, color: pathColor)
+    }
+    
+    /// mark 画Bezier分割线
+    func drawBezierPath(path:UIBezierPath,pathWidth:CGFloat = 1,color:UIColor = UIColor.lightGray){
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.lineWidth = pathWidth
+        shapeLayer.strokeColor = color.cgColor
+        shapeLayer.fillColor = UIColor.clear.cgColor // draw grid the line code not add
+        shapeLayer.path = path.cgPath
+        self.layer.addSublayer(shapeLayer)
     }
 }
 
-class ViewWithBgGradient:UIView{
-    
-    var gradientColors:[UIColor]!
-    var start:CGPoint =  CGPoint(x: 0, y: 0)//渐变起点
-    var end:CGPoint = CGPoint(x: 1, y: 1) //渐变终点
-    
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if let gradient = gradientColors{
-            addGradientLayer(start: start, end: end, frame: self.bounds, colors: gradient)
-        }
-    }
-    
-}
-
-// MARK: - UIView + Frame Extension
 extension UIView {
-    
-    /* X */
+    /// origin X
     public var x : CGFloat {
         get {
             return self.frame.origin.x
@@ -170,7 +138,7 @@ extension UIView {
         }
     }
     
-    /* Y */
+    /// origin Y
     public var y : CGFloat {
         get {
             return self.frame.origin.y
@@ -183,7 +151,7 @@ extension UIView {
         }
     }
     
-    /* Width */
+    /// size width
     public var width : CGFloat {
         get {
             return self.frame.size.width
@@ -196,7 +164,7 @@ extension UIView {
         }
     }
     
-    /* Height */
+    /// size height
     public var height : CGFloat {
         get {
             return self.frame.size.height
@@ -209,7 +177,7 @@ extension UIView {
         }
     }
     
-    /* Origin */
+    /// frame origin
     public var origin : CGPoint {
         get {
             return self.frame.origin
@@ -222,7 +190,7 @@ extension UIView {
         }
     }
     
-    /* Size */
+    /// frame size
     public var size : CGSize {
         get {
             return self.frame.size
@@ -236,83 +204,3 @@ extension UIView {
     }
 }
 
-// MARK: - CALayer + Frame Extension
-extension CALayer {
-    /* X */
-    public var x : CGFloat {
-        get {
-            return self.frame.origin.x
-        }
-        
-        set {
-            var frame = self.frame
-            frame.origin.x = x
-            self.frame = frame
-        }
-    }
-    
-    /* Y */
-    public var y : CGFloat {
-        get {
-            return self.frame.origin.y
-        }
-        
-        set {
-            var frame = self.frame
-            frame.origin.y = y
-            self.frame = frame
-        }
-    }
-    
-    /* Width */
-    public var width : CGFloat {
-        get {
-            return self.frame.size.width
-        }
-        
-        set {
-            var frame = self.frame
-            frame.size.width = width
-            self.frame = frame
-        }
-    }
-    
-    /* Height */
-    public var height : CGFloat {
-        get {
-            return self.frame.size.height
-        }
-        
-        set {
-            var frame = self.frame
-            frame.size.height = height
-            self.frame = frame
-        }
-    }
-    
-    /* Origin */
-    public var origin : CGPoint {
-        get {
-            return self.frame.origin
-        }
-        
-        set {
-            var frame = self.frame
-            frame.origin = origin
-            self.frame = frame
-        }
-    }
-    
-    /* Size */
-    public var size : CGSize {
-        get {
-            return self.frame.size
-        }
-        
-        set {
-            var frame = self.frame
-            frame.size = size
-            self.frame = frame
-        }
-    }
-}

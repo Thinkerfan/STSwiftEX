@@ -8,10 +8,8 @@
 
 import UIKit
 extension UITabBar{
-
-    /**
-     隐藏顶部一条黑线
-     */
+    
+    /// 隐藏顶部一条黑线
     public func hideTopLine(){
         self.shadowImage = UIImage()
         self.backgroundImage = UIImage()
@@ -27,6 +25,7 @@ extension UITabBar{
         static var TabCenterButton = "centerButton"
     }
 
+    /// 中间tab
     public var centerTab:UIButton?{
         get{
             //通过Key获取已存在的对象
@@ -38,9 +37,7 @@ extension UITabBar{
         }
     }
 
-    /**
-     添加中心按钮
-     */
+    /// 添加中心按钮，天天儿歌大全中有用到
     public func addCenterTab(image:String)->UIButton
     {
         if self.centerTab == nil
@@ -53,24 +50,4 @@ extension UITabBar{
         }
         return self.centerTab!
     }
-}
-
-public class CFTabbar:UITabBar{
-    var itemFrames = [CGRect]()
-    var tabBarItems = [UIView]()
-
-
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-
-        if itemFrames.isEmpty, let UITabBarButtonClass = NSClassFromString("UITabBarButton") as? NSObject.Type {
-            tabBarItems = subviews.filter({$0.isKind(of: UITabBarButtonClass)})
-            tabBarItems.forEach({itemFrames.append($0.frame)})
-        }
-
-        if !itemFrames.isEmpty, !tabBarItems.isEmpty, itemFrames.count == items?.count {
-            tabBarItems.enumerated().forEach({$0.element.frame = itemFrames[$0.offset]})
-        }
-    }
-    
 }

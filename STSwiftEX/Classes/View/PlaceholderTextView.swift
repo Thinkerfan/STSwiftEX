@@ -8,40 +8,49 @@
 
 import UIKit
 
-@IBDesignable class PlaceholderTextView: UITextView {
+@IBDesignable public class PlaceholderTextView: UITextView {
     
-    @IBInspectable var contentColor:UIColor = .black
-    @IBInspectable var placeHolderColor:UIColor = .placeholderGray
-    @IBInspectable var placeHolderStr:String = ""{
+    /// 内容颜色
+    @IBInspectable public var contentColor:UIColor = .black
+    
+    /// 提示占位符颜色
+    @IBInspectable public var placeHolderColor:UIColor = .placeholderGray
+    
+    /// 提示占位符内容
+    @IBInspectable public var placeHolderStr:String = ""{
         didSet{
             text = placeHolderStr
             textColor = placeHolderColor
         }
     }
 
-    override var text: String!{
+    /// 文本内容
+    public override var text: String!{
         didSet{
             textColor = contentColor
         }
     }
-    var bolderWidth: CGFloat!{
+    
+    /// 边框宽度
+    public var bolderWidth: CGFloat!{
         didSet{
             layer.borderWidth = bolderWidth
         }
     }
 
-    var content:String?{
+    /// 内容
+    public var content:String?{
         get{
             return (text==placeHolderStr||text.count==0) ? nil : text
         }
     }
 
-    override init(frame: CGRect, textContainer: NSTextContainer?) {
+    public override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         setupViews()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupViews()
     }

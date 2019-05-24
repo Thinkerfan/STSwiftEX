@@ -10,7 +10,7 @@ import UIKit
 
 extension CATransition {
     
-    //New viewController will appear from bottom of screen.
+    /// New viewController will appear from bottom of screen.
     public func segueFromBottom() -> CATransition {
         self.duration = 0.375 //set the duration to whatever you'd like.
         self.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
@@ -18,7 +18,7 @@ extension CATransition {
         self.subtype = CATransitionSubtype.fromTop
         return self
     }
-    //New viewController will appear from top of screen.
+    /// New viewController will appear from top of screen.
     public func segueFromTop() -> CATransition {
         self.duration = 0.375 //set the duration to whatever you'd like.
         self.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
@@ -26,7 +26,7 @@ extension CATransition {
         self.subtype = CATransitionSubtype.fromBottom
         return self
     }
-    //New viewController will appear from left side of screen.
+    /// New viewController will appear from left side of screen.
     public func segueFromLeft() -> CATransition {
         self.duration = 0.1 //set the duration to whatever you'd like.
         self.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
@@ -34,7 +34,7 @@ extension CATransition {
         self.subtype = CATransitionSubtype.fromLeft
         return self
     }
-    //New viewController will pop from right side of screen.
+    //// New viewController will pop from right side of screen.
     public func popFromRight() -> CATransition {
         self.duration = 0.1 //set the duration to whatever you'd like.
         self.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
@@ -42,7 +42,7 @@ extension CATransition {
         self.subtype = CATransitionSubtype.fromRight
         return self
     }
-    //New viewController will appear from left side of screen.
+    /// New viewController will appear from left side of screen.
     public func popFromLeft() -> CATransition {
         self.duration = 0.1 //set the duration to whatever you'd like.
         self.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)

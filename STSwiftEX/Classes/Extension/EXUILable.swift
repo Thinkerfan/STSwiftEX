@@ -1,4 +1,3 @@
-//
 //  EXUILable.swift
 //  Uncle
 //
@@ -10,11 +9,13 @@ import UIKit
 
 extension UILabel{
     
-   public static func cfLable(text:String? = nil,color:UIColor? = nil, align:NSTextAlignment = .left,size:CGFloat = 16)->UILabel{
+    /// Returns UILabel with PingFang SC font
+    public static func pfLable(text:String? = nil,color:UIColor? = nil, align:NSTextAlignment = .left,size:CGFloat = 16)->UILabel{
         let font = UIFont.pingFangSCFont(ofSize: size)
         return cfLable(text: text, color: color, align: align, font: font)
     }
     
+    /// Returns UILabel with font
     public static func cfLable(text:String? = nil,color:UIColor? = nil, align:NSTextAlignment = .left,font:UIFont)->UILabel{
         let v = UILabel()
         v.text = text

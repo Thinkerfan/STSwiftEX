@@ -1,6 +1,6 @@
 //
 //  EXFileManager.swift
-//  KTSZ
+//  文件管理扩展类
 //
 //  Created by cfans on 2018/10/22.
 //  Copyright © 2018年 cfans. All rights reserved.
@@ -9,6 +9,7 @@
 import Foundation
 extension FileManager {
 
+    /// copy file from resource to documentDirectory
     public func copyfileToUserDocumentDirectory(forResource name: String,
                                          ofType ext: String) throws
     {
@@ -23,7 +24,7 @@ extension FileManager {
             }
         }
     }
-
+    /// Return  url base on documentDirectory
     public func getFileFullPath(fileName:String)->String?{
         if let destPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                            .userDomainMask,
@@ -37,6 +38,7 @@ extension FileManager {
 }
 
 extension FileManager {
+    /// remove file if existed
     public func removeIfExisted(_ url:URL) -> Void {
         if FileManager.default.fileExists(atPath: url.path) {
             do {
@@ -47,7 +49,7 @@ extension FileManager {
             }
         }
     }
-    
+    /// Return temp url base on NSTemporaryDirectory
     public func tempFileUrl(_ outputName:String) ->URL{
         let path = NSTemporaryDirectory().appending(outputName)
         let exportURL = URL.init(fileURLWithPath: path)

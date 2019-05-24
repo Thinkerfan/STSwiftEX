@@ -83,11 +83,11 @@ class CFPresentDismissAnimator:NSObject,UIViewControllerAnimatedTransitioning{
 
 }
 
-class CFPresentBaseVC:UIViewController,UIViewControllerTransitioningDelegate, UIGestureRecognizerDelegate{
+public class CFPresentBaseVC:UIViewController,UIViewControllerTransitioningDelegate, UIGestureRecognizerDelegate{
 
     var percentDrivenTransition:UIPercentDrivenInteractiveTransition!
 
-    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil,isPushStyle:Bool){
+    public func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil,isPushStyle:Bool){
 
         if flag && isPushStyle {
             viewControllerToPresent.transitioningDelegate = self
@@ -106,11 +106,11 @@ class CFPresentBaseVC:UIViewController,UIViewControllerTransitioningDelegate, UI
     }
 
     // pragma mark - UIViewControllerTransitioningDelegate
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return CFPresentPushAnimator()
     }
 
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return CFPresentDismissAnimator()
     }
 
