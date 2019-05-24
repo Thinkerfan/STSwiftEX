@@ -1,0 +1,6 @@
+use_frameworks!
+target 'STSwiftEX_Tests' do
+  pod 'STSwiftEX', :path => '../'
+  
+  
+end
