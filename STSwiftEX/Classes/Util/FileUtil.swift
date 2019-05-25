@@ -11,7 +11,13 @@ import Foundation
 public struct CFFile {
     let name:String
     let path:String
-    let creationTime:TimeInterval
+    let createdTime:TimeInterval
+    
+    public init(name:String,path:String,createdTime:TimeInterval){
+        self.name = name
+        self.path = path
+        self.createdTime = createdTime
+    }
 }
 
 extension CFFile:Equatable{
@@ -76,7 +82,7 @@ public class FileUtil {
         }
 
         files.sort { (first, second) -> Bool in
-            return first.creationTime > second.creationTime
+            return first.createdTime > second.createdTime
         }
         return files
     }

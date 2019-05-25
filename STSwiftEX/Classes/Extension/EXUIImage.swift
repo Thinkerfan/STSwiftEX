@@ -10,7 +10,7 @@ import UIKit
 extension UIImage{
     
     /// 根据颜色值来调整UIImage的颜色
-    func tint(color: UIColor, blendMode: CGBlendMode) -> UIImage?{
+    public func tint(color: UIColor, blendMode: CGBlendMode) -> UIImage?{
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         defer { UIGraphicsEndImageContext() }
         color.set()
@@ -20,7 +20,7 @@ extension UIImage{
     }
     
     /// 生成正方形的UIImage
-    func square() -> UIImage {
+    public func square() -> UIImage {
         let imageWidth = self.size.width
         let imageHeight = self.size.height
         if  imageWidth != imageHeight{
@@ -35,7 +35,7 @@ extension UIImage{
     }
 
     /// 根据行数和列数来切分UIImage
-    func slice(column:Int,row:Int) -> [UIImage]{
+    public func slice(column:Int,row:Int) -> [UIImage]{
         var imageArray = [UIImage]()
         
         let imageWidth = self.size.width
@@ -55,9 +55,10 @@ extension UIImage{
     }
 
     /// 拷贝UIImage
-    func imageCopy()->UIImage{
+    public func imageCopy()->UIImage{
         return UIImage(cgImage: self.cgImage!)
     }
+    
 }
 
 // Image 缩放旋转处理

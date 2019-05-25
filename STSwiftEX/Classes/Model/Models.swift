@@ -11,4 +11,8 @@ import Foundation
 public struct ModelImgText{
     let image:String
     let text:String
+    public init(image:String,text:String){
+        self.image = image
+        self.text = text
+    }
 }

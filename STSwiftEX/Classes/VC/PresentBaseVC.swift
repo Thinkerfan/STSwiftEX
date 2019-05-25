@@ -83,7 +83,7 @@ class CFPresentDismissAnimator:NSObject,UIViewControllerAnimatedTransitioning{
 
 }
 
-public class CFPresentBaseVC:UIViewController,UIViewControllerTransitioningDelegate, UIGestureRecognizerDelegate{
+open class CFPresentBaseVC:UIViewController,UIViewControllerTransitioningDelegate, UIGestureRecognizerDelegate{
 
     var percentDrivenTransition:UIPercentDrivenInteractiveTransition!
 

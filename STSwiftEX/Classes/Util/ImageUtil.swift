@@ -9,8 +9,13 @@
 import UIKit
 
 public struct ImgCombineUnit {
-    var image:UIImage
-    var rect:CGRect
+    public var image:UIImage
+    public var rect:CGRect
+    
+    public init(image:UIImage,rect:CGRect){
+        self.image = image
+        self.rect = rect
+    }
 }
 
 public class ImageUtil{

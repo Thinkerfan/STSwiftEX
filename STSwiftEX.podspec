@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'STSwiftEX'
-  s.version          = '0.0.7'
+  s.version          = '0.0.9'
   s.summary          = ' Swift Extension kit'
   s.homepage         = 'https://github.com/Thinkerfan/STSwiftEX'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
