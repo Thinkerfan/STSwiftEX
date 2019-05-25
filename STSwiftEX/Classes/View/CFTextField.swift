@@ -11,7 +11,6 @@ import UIKit
 @IBDesignable public class CFTextField: UITextField {
     
     // Provides left padding for images
-    
     @IBInspectable public var leftPadding: CGFloat = 0
     @IBInspectable public var textLeftPadding: CGFloat = 18
     @IBInspectable public var borderSize: CGFloat = 1.0
@@ -42,7 +41,6 @@ import UIKit
             updateView()
         }
     }
-    
     
     @IBInspectable public var color: UIColor = UIColor.lightGray {
         didSet {

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'STSwiftEX'
-  s.version          = '0.0.5'
+  s.version          = '0.0.6'
   s.summary          = ' Swift Extension kit'
   s.homepage         = 'https://github.com/Thinkerfan/STSwiftEX'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -10,5 +10,8 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '10.0'
   s.source_files = 'STSwiftEX/Classes/**/*'
   s.swift_version = '4.2'  
+
+  s.dependency 'MBProgressHUD'
+  s.dependency 'Alamofire'
 
 end
