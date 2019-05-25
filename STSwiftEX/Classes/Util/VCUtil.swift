@@ -31,7 +31,7 @@ public func isIPhoneXType() -> Bool {
 public class VCUtil{
     
     ///   分享
-    public static func share(appid:String?, items: [Any],rootVC:UIViewController,completion: (() -> Void)? = nil){
+    public static func share(appid:String? = nil, items: [Any],rootVC:UIViewController,completion: (() -> Void)? = nil){
         var aItems = items
         if let aid = appid{
             let url = URL(string:"itms-apps://itunes.apple.com/app/id\(aid)")
