@@ -77,7 +77,7 @@ public class FileUtil {
                 let path = "\(fullDir)/\(file)"
                 let attr = try? manager.attributesOfItem(atPath: path)
                 let date = attr?[FileAttributeKey.modificationDate] as? Date
-                files.append(CFFile(name: file, path: path, creationTime:(date?.timeIntervalSince1970)!))
+                files.append(CFFile(name: file, path: path, createdTime:(date?.timeIntervalSince1970)!))
             }
         }
 
