@@ -8,6 +8,20 @@
 import UIKit
 extension UIButton{
     
+    /// set UIButton image top and label bottom
+    public func setVerticalImgText(image:String,title:String,spacing:CGFloat = 10){
+        setTitle(title, for: .normal)
+        setImage(UIImage(named: image), for: .normal)
+        
+        let imageHeight = self.imageView!.height
+        let imageWidth = self.imageView!.width;
+        let labelWidth = self.titleLabel!.width
+        let labelHeight = self.titleLabel!.height
+        
+        self.imageEdgeInsets = UIEdgeInsets(top: 0, left: labelWidth/2, bottom: 0, right: -labelWidth/2)
+        self.titleEdgeInsets = UIEdgeInsets(top: imageHeight+labelHeight+spacing, left: -imageWidth, bottom: 0, right: 0)
+    }
+    
     /// Verification code countdown
     /// - Parameter seconds: the coutdown second
     /// - Parameter endText: the text to show when time out

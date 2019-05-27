@@ -61,4 +61,24 @@ extension UIViewController {
         self.view.addSubview(bgNav)
         return bgNav
     }
+    
+    /// present vc by right to left animation
+    func presentVCFromRight(_ viewControllerToPresent: UIViewController) {
+        let transition = CATransition()
+        transition.duration = 0.25
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+        present(viewControllerToPresent, animated: false)
+    }
+    
+    /// dismiss vc by left to right animation
+    func dismissVCFromLeft() {
+        let transition = CATransition()
+        transition.duration = 0.25
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+        dismiss(animated: false)
+    }
 }

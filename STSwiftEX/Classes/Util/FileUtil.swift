@@ -9,9 +9,9 @@
 import Foundation
 
 public struct CFFile {
-    let name:String
-    let path:String
-    let createdTime:TimeInterval
+    public let name:String
+    public let path:String
+    public let createdTime:TimeInterval
     
     public init(name:String,path:String,createdTime:TimeInterval){
         self.name = name
