@@ -46,7 +46,7 @@ extension UIViewController {
     }
 
     /// dismiss VC
-    @objc public func dismissVC(){
+    @objc open func dismissVC(){
         self.dismiss(animated: true)
     }
     
@@ -63,7 +63,7 @@ extension UIViewController {
     }
     
     /// present vc by right to left animation
-    func presentVCFromRight(_ viewControllerToPresent: UIViewController) {
+    public func presentVCFromRight(_ viewControllerToPresent: UIViewController) {
         let transition = CATransition()
         transition.duration = 0.25
         transition.type = CATransitionType.push
@@ -73,7 +73,7 @@ extension UIViewController {
     }
     
     /// dismiss vc by left to right animation
-    func dismissVCFromLeft() {
+    public func dismissVCFromLeft() {
         let transition = CATransition()
         transition.duration = 0.25
         transition.type = CATransitionType.push
