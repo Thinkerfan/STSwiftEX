@@ -25,7 +25,7 @@ extension UIImage{
         let imageHeight = self.size.height
         if  imageWidth != imageHeight{
             let minSize = min(imageWidth, imageHeight)
-            let newRect: CGRect = CGRect(x: 0, y: 0, width: minSize, height: minSize)
+            let newRect: CGRect = CGRect(x: (imageWidth-minSize)/2, y: (imageHeight-minSize)/2, width: minSize, height: minSize)
             let imageRef = self.cgImage!.cropping(to: newRect)
             let newImage = UIImage(cgImage: imageRef!)
             return newImage
